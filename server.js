@@ -11,6 +11,7 @@ const cors = require('cors'); // Allows our frontend app to talk to this backend
 const app = express();
 
 // 3. MIDDLEWARE (The Security & Translation Layer)
+// The Bouncer lets everyone in
 app.use(cors()); // Opens the doors for your frontend to make requests
 app.use(express.json()); // Translates incoming internet data into readable JSON
 // Add this right under app.use(express.json());
