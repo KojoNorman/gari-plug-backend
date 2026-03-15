@@ -14,7 +14,7 @@ export default function VendorDashboard() {
   // --- 🛠️ 1. FUNCTIONS MOVED OUTSIDE FOR GLOBAL ACCESS ---
   const fetchInventory = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/products?role=vendor');
+      const response = await axios.get('https://gari-plug-api.onrender.com/api/products?role=vendor');
       setProducts(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -25,7 +25,7 @@ export default function VendorDashboard() {
 
   const fetchStoreStatus = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/settings');
+      const res = await axios.get('https://gari-plug-api.onrender.com/api/settings');
       setIsStoreOpen(res.data.isStoreOpen);
     } catch (error) {
       console.error("Failed to check store status");
@@ -65,7 +65,7 @@ export default function VendorDashboard() {
       }).join(''));
       const userId = JSON.parse(jsonPayload).id || JSON.parse(jsonPayload)._id;
 
-      const response = await axios.get(`http://localhost:5000/api/orders/user/${userId}/last`);
+      const response = await axios.get(`https://gari-plug-api.onrender.com/api/orders/user/${userId}/last`);
       const lastOrder = response.data;
 
       lastOrder.products.forEach(item => {

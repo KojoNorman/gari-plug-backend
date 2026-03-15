@@ -13,7 +13,7 @@ export default function RiderDashboard() {
 
   const fetchTransitOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/orders/all');
+      const response = await axios.get('https://gari-plug-api.onrender.com/api/orders/all');
       const activeDeliveries = response.data.filter(o => o.paymentStatus === 'Delivered');
       setTransitOrders(activeDeliveries);
       setIsLoading(false);
@@ -34,7 +34,7 @@ export default function RiderDashboard() {
       const riderId = payload.id || payload._id;
 
       // Send the update to the database with the Rider's ID attached
-      await axios.put(`http://localhost:5000/api/orders/${orderId}/status`, { 
+      await axios.put(`https://gari-plug-api.onrender.com/api/orders/${orderId}/status`, { 
         paymentStatus: 'Completed',
         paymentMethod: 'Paid (Cash Collected by Rider)',
         rider: riderId // 👈 Stamps the receipt!

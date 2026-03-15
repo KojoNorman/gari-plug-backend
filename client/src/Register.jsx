@@ -31,7 +31,7 @@ export default function Register() {
     
     try {
       // Send the new user details to our backend
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await axios.post('https://gari-plug-api.onrender.com/api/auth/register', {
         fullName,
         phoneNumber,
         password,

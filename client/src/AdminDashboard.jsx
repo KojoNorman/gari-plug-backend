@@ -65,7 +65,7 @@ export default function AdminDashboard() {
   // --- API CALLS ---
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/orders/all');
+      const response = await axios.get('https://gari-plug-api.onrender.com/api/orders/all');
       setOrders(response.data);
       setIsOrdersLoading(false);
     } catch (error) { setIsOrdersLoading(false); }
@@ -73,7 +73,7 @@ export default function AdminDashboard() {
 
   const fetchSettings = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/settings');
+      const res = await axios.get('https://gari-plug-api.onrender.com/api/settings');
       setIsStoreOpen(res.data.isStoreOpen);
     } catch (error) { console.error("Failed to load settings"); }
   };
@@ -81,7 +81,7 @@ export default function AdminDashboard() {
   const fetchProducts = async () => {
     setIsProductsLoading(true);
     try {
-      const response = await axios.get('http://localhost:5000/api/products/all');
+      const response = await axios.get('https://gari-plug-api.onrender.com/api/products/all');
       setProducts(response.data);
       setIsProductsLoading(false);
     } catch (error) { setIsProductsLoading(false); }
@@ -90,7 +90,7 @@ export default function AdminDashboard() {
   const fetchUsers = async () => {
     setIsUsersLoading(true);
     try {
-      const response = await axios.get('http://localhost:5000/api/auth/users');
+      const response = await axios.get('https://gari-plug-api.onrender.com/api/auth/users');
       setUsers(response.data);
       setIsUsersLoading(false);
     } catch (error) { setIsUsersLoading(false); }
@@ -98,7 +98,7 @@ export default function AdminDashboard() {
 
   const fetchPromos = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/promo/all');
+      const res = await axios.get('https://gari-plug-api.onrender.com/api/promo/all');
       setPromos(res.data);
     } catch (error) { console.error("Failed to load promos"); }
   };
@@ -118,14 +118,14 @@ export default function AdminDashboard() {
   const toggleStoreStatus = async () => {
     try {
       setIsStoreOpen(prev => !prev); 
-      await axios.put('http://localhost:5000/api/settings/toggle');
+      await axios.put('https://gari-plug-api.onrender.com/api/settings/toggle');
     } catch (error) { fetchSettings(); }
   };
 
   const updateOrderStatus = async (orderId, newStatus) => {
     try {
       setOrders(orders.map(order => order._id === orderId ? { ...order, paymentStatus: newStatus } : order));
-      await axios.put(`http://localhost:5000/api/orders/${orderId}/status`, { paymentStatus: newStatus });
+      await axios.put(`https://gari-plug-api.onrender.com/api/orders/${orderId}/status`, { paymentStatus: newStatus });
     } catch (error) { fetchOrders(); }
   };
 
@@ -134,7 +134,7 @@ export default function AdminDashboard() {
     if (!confirm) return;
     try {
       setOrders(orders.map(order => order._id === orderId ? { ...order, paymentStatus: 'Cancelled' } : order));
-      await axios.put(`http://localhost:5000/api/orders/${orderId}/cancel`);
+      await axios.put(`https://gari-plug-api.onrender.com/api/orders/${orderId}/cancel`);
       fetchProducts();
     } catch (error) { fetchOrders(); }
   };
@@ -142,7 +142,7 @@ export default function AdminDashboard() {
   const updateUserRole = async (userId, newRole) => {
     try {
       setUsers(users.map(user => user._id === userId ? { ...user, role: newRole } : user));
-      await axios.put(`http://localhost:5000/api/auth/users/${userId}/role`, { role: newRole });
+      await axios.put(`https://gari-plug-api.onrender.com/api/auth/users/${userId}/role`, { role: newRole });
       alert(`✅ User role updated to ${newRole.toUpperCase()}!`);
     } catch (error) { fetchUsers(); }
   };
@@ -150,7 +150,7 @@ export default function AdminDashboard() {
   const handleCreatePromo = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/promo/new', newPromo);
+      await axios.post('https://gari-plug-api.onrender.com/api/promo/new', newPromo);
       setNewPromo({ code: '', discountPercentage: '' });
       fetchPromos();
       alert("🎟️ Promo Code Created!");
@@ -159,7 +159,7 @@ export default function AdminDashboard() {
 
   const togglePromoStatus = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/api/promo/${id}/toggle`);
+      await axios.put(`https://gari-plug-api.onrender.com/api/promo/${id}/toggle`);
       fetchPromos();
     } catch (error) { alert("Failed to toggle promo."); }
   };
@@ -172,8 +172,8 @@ export default function AdminDashboard() {
   const saveProductChanges = async (e) => {
     e.preventDefault();
     try {
-      if (isCreatingNew) await axios.post(`http://localhost:5000/api/products/new`, editingProduct);
-      else await axios.put(`http://localhost:5000/api/products/${editingProduct._id}`, editingProduct);
+      if (isCreatingNew) await axios.post(`https://gari-plug-api.onrender.com/api/products/new`, editingProduct);
+      else await axios.put(`https://gari-plug-api.onrender.com/api/products/${editingProduct._id}`, editingProduct);
       setEditingProduct(null); 
       setIsCreatingNew(false);
       fetchProducts(); 
@@ -185,7 +185,7 @@ export default function AdminDashboard() {
     if (!confirm) return;
     try {
       setOrders(orders.map(o => ordersToClear.find(clear => clear._id === o._id) ? { ...o, isCashReconciled: true } : o));
-      await Promise.all(ordersToClear.map(order => axios.put(`http://localhost:5000/api/orders/${order._id}/status`, { isCashReconciled: true })));
+      await Promise.all(ordersToClear.map(order => axios.put(`https://gari-plug-api.onrender.com/api/orders/${order._id}/status`, { isCashReconciled: true })));
     } catch (error) { fetchOrders(); }
   };
 

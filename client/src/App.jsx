@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './CartContext'; // <-- Import the backpack provider
+import LandingPage from './LandingPage'; // (or './pages/LandingPage' depending on where you saved it)
 import Login from './Login';
 import Register from './Register';
 import StudentDashboard from './StudentDashboard';
@@ -14,7 +15,8 @@ function App() {
     <CartProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/student" element={<StudentDashboard />} />
           <Route path="/vendor" element={<VendorDashboard />} />

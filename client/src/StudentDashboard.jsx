@@ -14,7 +14,7 @@ export default function StudentDashboard() {
   // --- 🛠️ 1. MOVE FETCH FUNCTIONS OUTSIDE SO THE INTERVAL CAN SEE THEM ---
   const fetchInventory = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/products?role=student');
+      const response = await axios.get('https://gari-plug-api.onrender.com/api/products?role=student');
       setProducts(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -25,7 +25,7 @@ export default function StudentDashboard() {
 
   const fetchStoreStatus = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/settings');
+      const res = await axios.get('https://gari-plug-api.onrender.com/api/settings');
       setIsStoreOpen(res.data.isStoreOpen);
     } catch (error) {
       console.error("Failed to check store status");

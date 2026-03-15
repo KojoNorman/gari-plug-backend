@@ -19,7 +19,7 @@ export default function Login() {
 
     try {
       // 1. Send credentials to the engine
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post('https://gari-plug-api.onrender.com/api/auth/login', {
         phoneNumber,
         password
       });

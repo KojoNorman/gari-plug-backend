@@ -53,7 +53,7 @@ export default function Checkout() {
     setPromoMessage({ text: '', type: '' });
 
     try {
-      const res = await axios.post('http://localhost:5000/api/promo/validate', { code: promoCodeInput });
+      const res = await axios.post('https://gari-plug-api.onrender.com/api/promo/validate', { code: promoCodeInput });
       setAppliedDiscount(res.data.discountPercentage);
       setPromoMessage({ text: res.data.message, type: 'success' });
     } catch (error) {
@@ -99,7 +99,7 @@ export default function Checkout() {
       };
 
       // Save to database
-      await axios.post('http://localhost:5000/api/orders/new', orderData);
+      await axios.post('https://gari-plug-api.onrender.com/api/orders/new', orderData);
 
       // Tell the user it worked!
       if (methodString === 'MoMo (Paid)') {
