@@ -15,7 +15,7 @@ export default function LandingPage() {
             className="h-10 w-10 md:h-12 md:w-12 rounded-full border-2 border-veroYellow object-cover"
             onError={(e) => { e.target.style.display = 'none' }}
           />
-          <span className="font-black text-xl text-gray-900 tracking-tight">Aunty Vero's</span>
+          <span className="font-black text-xl text-gray-900 tracking-tight">Aunty Vero's Gari Plug</span>
         </div>
         <button 
           onClick={() => navigate('/login')} 
